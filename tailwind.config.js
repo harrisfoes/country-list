@@ -3,7 +3,20 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
-    extend: {},
+    fontFamily: {
+      nunito: ["Nunito Sans", "sans-serif"],
+    },
+    extend: {
+      colors: {
+        darkblue: {
+          500: "hsl(209, 23%, 22%)",
+          600: "hsl(207, 26%, 17%)",
+          900: "hsl(200, 15%, 8%)",
+        },
+        darkgray: "hsl(0,0%,52%)",
+        lightgray: "hsl(0,0%,98%)",
+      },
+    },
   },
   plugins: [],
 };

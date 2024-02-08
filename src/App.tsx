@@ -1,5 +1,7 @@
 import "./index.css";
 import { useState, useEffect } from "react";
+import Header from "./components/sections/Header";
+import Footer from "./components/sections/Footer";
 
 function App() {
   const [theme, setTheme] = useState<string | null>(null);
@@ -25,22 +27,20 @@ function App() {
   };
 
   return (
-    <main className="min-h-screen dark:bg-black dark:text-white flex flex-col items-center justify-center">
-      <h1 className="text3xl underline"></h1>
-      Hello Nation
-      <div>Wish you were here for</div>
-      <button
-        className="bg-slate-800 p-4 rounded-xl hover:opacity-75 text-white font-bold dark:bg-white dark:text-slate-800"
-        onClick={handleThemeSwitch}
-      >
-        Change Theme
-      </button>
-      <ul>
-        <li>This thing</li>
-        <li>This other thing</li>
-        <li>What are you getting at?</li>
-      </ul>
-    </main>
+    <>
+      <Header handleThemeSwitch={handleThemeSwitch} />
+      <main className="min-h-screen dark:bg-darkblue-600 dark:text-white text-darkblue-900 bg-lightgray flex flex-col items-center justify-center">
+        <h1 className="text3xl underline"></h1>
+        Hello Nation
+        <div>Wish you were here for</div>
+        <ul>
+          <li>This thing</li>
+          <li>This other thing</li>
+          <li>What are you getting at?</li>
+        </ul>
+      </main>
+      <Footer />
+    </>
   );
 }
 
