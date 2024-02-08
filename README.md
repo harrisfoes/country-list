@@ -54,10 +54,10 @@ Step by step process
 
 - [ ] Planning (the process of brainstorming and writing this)
 - [x] Figure out theme switching
-- [ ] Setup tailwind layout variables
-- [ ] Setup Navbar
-- [ ] Setup Footer
-- [ ] Color them up
+- [x] Setup tailwind layout variables
+- [x] Setup Navbar
+- [x] Setup Footer
+- [x] Color them up
 
 ### Built with
 
