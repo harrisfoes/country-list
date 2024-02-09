@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Header from "./components/sections/Header";
 import Footer from "./components/sections/Footer";
 
+const selectOptions = ["Africa", "America", "Asia", "Europe", "Oceania"];
+
 function App() {
   const [theme, setTheme] = useState<string | null>(null);
 
@@ -28,18 +30,31 @@ function App() {
 
   return (
     <>
-      <Header handleThemeSwitch={handleThemeSwitch} />
-      <main className="min-h-screen dark:bg-darkblue-600 dark:text-white text-darkblue-900 bg-lightgray flex flex-col items-center justify-center">
-        <h1 className="text3xl underline"></h1>
-        Hello Nation
-        <div>Wish you were here for</div>
-        <ul>
-          <li>This thing</li>
-          <li>This other thing</li>
-          <li>What are you getting at?</li>
-        </ul>
-      </main>
-      <Footer />
+      <div className="mx-auto">
+        <Header handleThemeSwitch={handleThemeSwitch} theme={theme} />
+        <main className="dark:bg-darkblue-600 min-h-screen dark:text-white text-darkblue-900 bg-lightgray flex flex-col items-center ">
+          <div className="relative w-full  flex">
+            <input
+              type="text"
+              name="search-country"
+              id="search-country"
+              placeholder="Search for a country..."
+              className="my-6 mx-auto shadow-md dark:bg-darkblue-500 pl-12 py-4 border-1 rounded-md w-5/6 outline-none"
+            />
+          </div>
+          <div>
+            <select
+              defaultValue="Search for a country..."
+              className="p-2 rounded-lg bg-white text-darkblue-500"
+            >
+              <option value="">Select for a country...</option>
+              <option value="">Africa</option>
+              <option value="">Pusok</option>
+            </select>
+          </div>
+        </main>
+        <Footer />
+      </div>
     </>
   );
 }

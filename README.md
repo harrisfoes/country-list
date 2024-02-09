@@ -58,6 +58,12 @@ Step by step process
 - [x] Setup Navbar
 - [x] Setup Footer
 - [x] Color them up
+- [x] Dark and Lightmode image
+- [x] Sizing them up for tablet/desktop
+- [x] Added searchbar
+- [ ] Add Region selector
+- [ ] Prototype Flag Card
+- [ ]
 
 ### Built with
 
