@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Header from "./components/sections/Header";
 import Footer from "./components/sections/Footer";
 import data from "./data/data.json";
+import FlagCard from "./components/ui/FlagCard";
 
 const selectOptions = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
@@ -33,7 +34,7 @@ function App() {
     <>
       <div className="mx-auto">
         <Header handleThemeSwitch={handleThemeSwitch} theme={theme} />
-        <main className="flex min-h-screen flex-col items-center bg-lightgray text-darkblue-900 dark:bg-darkblue-600 dark:text-white ">
+        <main className="container mx-auto flex min-h-screen flex-col items-center bg-lightgray text-darkblue-900 dark:bg-darkblue-600 dark:text-white ">
           <div className="flex w-full flex-col md:flex-row md:items-center md:justify-around">
             <div className="relative flex w-full">
               <input
@@ -41,14 +42,14 @@ function App() {
                 name="search-country"
                 id="search-country"
                 placeholder="Search for a country..."
-                className="border-1 mx-auto my-6 w-5/6 max-w-[480px] rounded-md py-4 pl-12 shadow-md outline-none dark:bg-darkblue-500"
+                className="border-1 mx-auto my-6 w-5/6 max-w-[480px] rounded-md py-4 pl-12 shadow-md outline-sky-600 dark:bg-darkblue-500"
               />
             </div>
 
             <div className="mx-auto  w-5/6">
               <select
                 defaultValue="Search for a country..."
-                className="text-md cursor-pointer rounded-lg border-0 bg-white px-4 py-4 text-darkblue-500 drop-shadow-md focus:ring-0 dark:bg-darkblue-500 dark:text-white"
+                className="text-md cursor-pointer rounded-lg border-0 bg-white py-4 pl-4 pr-6 text-darkblue-500 outline-sky-600 drop-shadow-md focus:ring-0 dark:bg-darkblue-500 dark:text-white"
               >
                 <option selected>Filter by Region</option>
                 <option value="Africa">Africa</option>
@@ -60,27 +61,24 @@ function App() {
             </div>
           </div>
 
-          <div className="my-6">
-            <div className="flag-card my-4 w-full pb-6 shadow-md">
-              <img src={data[1].flags.png} alt="flag-imge" />
-              <div className="flag-text mx-5 my-6">
-                <span className="text-lg font-extrabold">{data[1].name}</span>
-                <div className="details mt-4 flex flex-col">
-                  <div>
-                    <span className="font-medium">Population: </span>
-                    <span className="font-light">{data[1].population}</span>
-                  </div>
-                  <div>
-                    <span className="font-medium">Region: </span>
-                    <span className="font-light">{data[1].region}</span>
-                  </div>
-                  <div>
-                    <span className="font-medium">Capital: </span>
-                    <span className="font-light">{data[1].capital}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="mx-auto my-6 grid w-full grid-flow-row auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {data.map((items, index) => {
+              //console.log(typeof items.capital);
+              if (typeof items.capital == undefined) {
+                console.log(items.capital);
+              }
+
+              return (
+                <FlagCard
+                  key={items.name + "_" + index}
+                  image={items.flags.png}
+                  name={items.name}
+                  population={items.population.toString()}
+                  region={items.region}
+                  capital={items.capital}
+                />
+              );
+            })}
           </div>
         </main>
         <Footer />
