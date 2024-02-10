@@ -52,7 +52,7 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 Step by step process
 
-- [ ] Planning (the process of brainstorming and writing this)
+- [x] Planning (the process of brainstorming and writing this)
 - [x] Figure out theme switching
 - [x] Setup tailwind layout variables
 - [x] Setup Navbar
@@ -61,7 +61,8 @@ Step by step process
 - [x] Dark and Lightmode image
 - [x] Sizing them up for tablet/desktop
 - [x] Added searchbar
-- [ ] Add Region selector
+- [x] Add Region selector
+- [x] Styling the Select is actually challenging - option styling is limited as per MDN, check this later
 - [ ] Prototype Flag Card
 - [ ]
 
