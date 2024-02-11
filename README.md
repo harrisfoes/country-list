@@ -63,8 +63,11 @@ Step by step process
 - [x] Added searchbar
 - [x] Add Region selector
 - [x] Styling the Select is actually challenging - option styling is limited as per MDN, check this later
-- [ ] Prototype Flag Card
-- [ ]
+- [x] Prototype Flag Card
+- [x] Add all flags and style
+- [x] Flag Filtering for searchbar
+- [x] useffect for handling empty string
+- [ ] Flag filtering with region selector
 
 ### Built with
 
