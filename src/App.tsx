@@ -11,6 +11,7 @@ function App() {
   const [theme, setTheme] = useState<string | null>(null);
   const [input, setInput] = useState("");
   const [filteredCountries, setFilteredCountries] = useState(data);
+  const [region, setRegion] = useState("");
 
   //Theme preferred by browser
   useEffect(() => {
@@ -50,18 +51,38 @@ function App() {
     setFilteredCountries(filterCountries);
   };
 
+  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    setRegion(value);
+  };
+
   //useffect reset if input is empty
   //useffect fires to filter out based on input
   useEffect(() => {
+    //empty --> show everything from data
     if (input === "") {
       setFilteredCountries(data);
-    } else {
-      const updateDataFilter = data.filter((country) => {
+    }
+    //input --> show everything that includes input string
+    if (input.length > 0) {
+      const updateDataFilter = filteredCountries.filter((country) => {
         return country.name.toLowerCase().includes(input.toLowerCase());
       });
       setFilteredCountries(updateDataFilter);
     }
   }, [input]);
+
+  useEffect(() => {
+    if (region !== "") {
+      console.log(input);
+      console.log(region);
+      const updateRegionFilter = filteredCountries.filter((country) => {
+        return country.region.toLowerCase() === region.toLowerCase();
+      });
+      console.log(updateRegionFilter);
+      setFilteredCountries(updateRegionFilter);
+    }
+  }, [region]);
 
   return (
     <>
@@ -86,8 +107,11 @@ function App() {
               <select
                 defaultValue="Search for a country..."
                 className="text-md cursor-pointer rounded-lg border-0 bg-white py-4 pl-4 pr-6 text-darkblue-500 outline-sky-600 drop-shadow-md focus:ring-0 dark:bg-darkblue-500 dark:text-white"
+                onChange={selectChange}
               >
-                <option>Filter by Region</option>
+                <option selected value="">
+                  Filter by Region
+                </option>
                 {regionOptions.map((items) => {
                   return (
                     <option key={items} value={items}>
