@@ -5,13 +5,13 @@ import Footer from "./components/sections/Footer";
 import data from "./data/data.json";
 import FlagCard from "./components/ui/FlagCard";
 
-const regionOptions = ["Africa", "America", "Asia", "Europe", "Oceania"];
+const regionOptions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 
 function App() {
   const [theme, setTheme] = useState<string | null>(null);
   const [input, setInput] = useState("");
   const [filteredCountries, setFilteredCountries] = useState(data);
-  const [region, setRegion] = useState("");
+  const [region, setRegion] = useState("default");
 
   //Theme preferred by browser
   useEffect(() => {
@@ -61,28 +61,45 @@ function App() {
   useEffect(() => {
     //empty --> show everything from data
     if (input === "") {
-      setFilteredCountries(data);
+      if (region !== "default") {
+        const updateRegionFilter = data.filter((country) => {
+          return country.region.toLowerCase() === region.toLowerCase();
+        });
+        setFilteredCountries(updateRegionFilter);
+      } else {
+        setFilteredCountries(data);
+      }
     }
+
     //input --> show everything that includes input string
     if (input.length > 0) {
-      const updateDataFilter = filteredCountries.filter((country) => {
+      const updateDataFilter = data.filter((country) => {
         return country.name.toLowerCase().includes(input.toLowerCase());
       });
-      setFilteredCountries(updateDataFilter);
-    }
-  }, [input]);
 
+      if (region !== "default") {
+        const updateRegionFilter = updateDataFilter.filter((country) => {
+          return country.region.toLowerCase() === region.toLowerCase();
+        });
+        setFilteredCountries(updateRegionFilter);
+      } else {
+        setFilteredCountries(updateDataFilter);
+      }
+    }
+  }, [input, region]);
+
+  /*
   useEffect(() => {
-    if (region !== "") {
+    if (region !== "default") {
       console.log(input);
       console.log(region);
-      const updateRegionFilter = filteredCountries.filter((country) => {
+      const updateRegionFilter = data.filter((country) => {
         return country.region.toLowerCase() === region.toLowerCase();
       });
       console.log(updateRegionFilter);
       setFilteredCountries(updateRegionFilter);
     }
-  }, [region]);
+  }, [region]); */
 
   return (
     <>
@@ -109,7 +126,7 @@ function App() {
                 className="text-md cursor-pointer rounded-lg border-0 bg-white py-4 pl-4 pr-6 text-darkblue-500 outline-sky-600 drop-shadow-md focus:ring-0 dark:bg-darkblue-500 dark:text-white"
                 onChange={selectChange}
               >
-                <option selected value="">
+                <option selected value="default">
                   Filter by Region
                 </option>
                 {regionOptions.map((items) => {
