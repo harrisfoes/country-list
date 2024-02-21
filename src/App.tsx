@@ -4,12 +4,14 @@ import Header from "./components/sections/Header";
 import Footer from "./components/sections/Footer";
 import data from "./data/data.json";
 import FlagCard from "./components/ui/FlagCard";
+//import testdata from "../public/data/data.json";
 
 const regionOptions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 
 function App() {
   const [theme, setTheme] = useState<string | null>(null);
   const [input, setInput] = useState("");
+  const [allData, setAllData] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState(data);
   const [region, setRegion] = useState("default");
 
@@ -56,6 +58,16 @@ function App() {
     setRegion(value);
   };
 
+  useEffect(() => {
+    const fetchedData = fetch("/country-list/data.json")
+      .then((res) => res.json())
+      .then((allData) => console.log(allData))
+      .catch((error) => {
+        console.error("There was a problem with your fetch operation", error);
+      });
+    //TODO: fetch correctly lol
+  }, []);
+
   //useffect reset if input is empty
   //useffect fires to filter out based on input
   useEffect(() => {
@@ -67,7 +79,7 @@ function App() {
         });
         setFilteredCountries(updateRegionFilter);
       } else {
-        setFilteredCountries(data);
+        setFilteredCountries(filteredCountries);
       }
     }
 
@@ -87,6 +99,9 @@ function App() {
       }
     }
   }, [input, region]);
+
+  console.log(filteredCountries);
+  console.log(allData);
 
   return (
     <>
@@ -144,7 +159,7 @@ function App() {
           </div>
 
           <div className="mx-auto my-6 grid w-full grid-flow-row auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filteredCountries.length > 0 &&
+            {filteredCountries &&
               filteredCountries.map((items, index) => {
                 return (
                   <FlagCard
@@ -157,7 +172,7 @@ function App() {
                   />
                 );
               })}
-            {filteredCountries.length === 0 && (
+            {filteredCountries && filteredCountries.length === 0 && (
               <div className="text-center text-2xl font-semibold">
                 No match found
               </div>
