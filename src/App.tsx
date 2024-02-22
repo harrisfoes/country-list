@@ -11,8 +11,8 @@ const regionOptions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 function App() {
   const [theme, setTheme] = useState<string | null>(null);
   const [input, setInput] = useState("");
-  const [allData, setAllData] = useState([]);
-  const [filteredCountries, setFilteredCountries] = useState(data);
+  const [allData, setAllData] = useState(null);
+  const [filteredCountries, setFilteredCountries] = useState(null);
   const [region, setRegion] = useState("default");
 
   //Theme preferred by browser
@@ -59,9 +59,13 @@ function App() {
   };
 
   useEffect(() => {
-    const fetchedData = fetch("/country-list/data.json")
+    fetch("/country-list/data.json")
       .then((res) => res.json())
-      .then((allData) => console.log(allData))
+      .then((allData) => {
+        console.log(allData);
+        setAllData(allData);
+        setFilteredCountries(allData);
+      })
       .catch((error) => {
         console.error("There was a problem with your fetch operation", error);
       });
@@ -70,22 +74,23 @@ function App() {
 
   //useffect reset if input is empty
   //useffect fires to filter out based on input
+
   useEffect(() => {
     //empty --> show everything from data
     if (input === "") {
       if (region !== "default") {
-        const updateRegionFilter = data.filter((country) => {
+        const updateRegionFilter = allData.filter((country) => {
           return country.region.toLowerCase() === region.toLowerCase();
         });
         setFilteredCountries(updateRegionFilter);
       } else {
-        setFilteredCountries(filteredCountries);
+        setFilteredCountries(allData);
       }
     }
 
     //input --> show everything that includes input string
     if (input.length > 0) {
-      const updateDataFilter = data.filter((country) => {
+      const updateDataFilter = allData.filter((country) => {
         return country.name.toLowerCase().includes(input.toLowerCase());
       });
 
@@ -99,9 +104,6 @@ function App() {
       }
     }
   }, [input, region]);
-
-  console.log(filteredCountries);
-  console.log(allData);
 
   return (
     <>
