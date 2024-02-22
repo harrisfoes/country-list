@@ -2,8 +2,8 @@ import "./index.css";
 import React, { useState, useEffect } from "react";
 import Header from "./components/sections/Header";
 import Footer from "./components/sections/Footer";
-import data from "./data/data.json";
 import FlagCard from "./components/ui/FlagCard";
+import { CountryAPISource } from "./types/api";
 //import testdata from "../public/data/data.json";
 
 const regionOptions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
@@ -11,8 +11,10 @@ const regionOptions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 function App() {
   const [theme, setTheme] = useState<string | null>(null);
   const [input, setInput] = useState("");
-  const [allData, setAllData] = useState(null);
-  const [filteredCountries, setFilteredCountries] = useState(null);
+  const [allData, setAllData] = useState<CountryAPISource[] | null>(null);
+  const [filteredCountries, setFilteredCountries] = useState<
+    CountryAPISource[] | null
+  >(null);
   const [region, setRegion] = useState("default");
 
   //Theme preferred by browser
@@ -40,7 +42,7 @@ function App() {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
 
-    const filterCountries = data
+    const filterCountries = allData
       .map((country) => {
         return country;
       })
@@ -74,7 +76,6 @@ function App() {
 
   //useffect reset if input is empty
   //useffect fires to filter out based on input
-
   useEffect(() => {
     //empty --> show everything from data
     if (input === "") {
