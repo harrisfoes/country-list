@@ -42,17 +42,19 @@ function App() {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
 
-    const filterCountries = allData
-      .map((country) => {
-        return country;
-      })
-      .filter((country) => {
-        return country.name.toLowerCase().includes(input.toLowerCase());
-      });
+    if (allData != null) {
+      const filterCountries = allData
+        .map((country) => {
+          return country;
+        })
+        .filter((country) => {
+          return country.name.toLowerCase().includes(input.toLowerCase());
+        });
 
-    console.log(filteredCountries);
-    console.log(input);
-    setFilteredCountries(filterCountries);
+      console.log(filteredCountries);
+      console.log(input);
+      setFilteredCountries(filterCountries);
+    }
   };
 
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -78,30 +80,32 @@ function App() {
   //useffect fires to filter out based on input
   useEffect(() => {
     //empty --> show everything from data
-    if (input === "") {
-      if (region !== "default") {
-        const updateRegionFilter = allData.filter((country) => {
-          return country.region.toLowerCase() === region.toLowerCase();
-        });
-        setFilteredCountries(updateRegionFilter);
-      } else {
-        setFilteredCountries(allData);
+    if (allData != null) {
+      if (input === "") {
+        if (region !== "default") {
+          const updateRegionFilter = allData.filter((country) => {
+            return country.region.toLowerCase() === region.toLowerCase();
+          });
+          setFilteredCountries(updateRegionFilter);
+        } else {
+          setFilteredCountries(allData);
+        }
       }
-    }
 
-    //input --> show everything that includes input string
-    if (input.length > 0) {
-      const updateDataFilter = allData.filter((country) => {
-        return country.name.toLowerCase().includes(input.toLowerCase());
-      });
-
-      if (region !== "default") {
-        const updateRegionFilter = updateDataFilter.filter((country) => {
-          return country.region.toLowerCase() === region.toLowerCase();
+      //input --> show everything that includes input string
+      if (input.length > 0) {
+        const updateDataFilter = allData.filter((country) => {
+          return country.name.toLowerCase().includes(input.toLowerCase());
         });
-        setFilteredCountries(updateRegionFilter);
-      } else {
-        setFilteredCountries(updateDataFilter);
+
+        if (region !== "default") {
+          const updateRegionFilter = updateDataFilter.filter((country) => {
+            return country.region.toLowerCase() === region.toLowerCase();
+          });
+          setFilteredCountries(updateRegionFilter);
+        } else {
+          setFilteredCountries(updateDataFilter);
+        }
       }
     }
   }, [input, region]);
