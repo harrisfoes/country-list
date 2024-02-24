@@ -73,7 +73,6 @@ function App() {
       .catch((error) => {
         console.error("There was a problem with your fetch operation", error);
       });
-    //TODO: fetch correctly lol
   }, []);
 
   //useffect reset if input is empty
@@ -139,7 +138,7 @@ function App() {
                 name="search-country"
                 id="search-country"
                 placeholder="Search for a country..."
-                className="border-1 mx-auto my-6 w-[480px] max-w-[95%] rounded-md py-4 pl-12 shadow-md outline-sky-600 dark:bg-darkblue-500"
+                className="border-1 mx-auto my-6 w-[480px] max-w-[95%] rounded-md  py-4 pl-12 shadow-md outline-sky-600 dark:bg-darkblue-500"
                 value={input}
                 onChange={handleSearch}
               />

@@ -26,7 +26,9 @@ export default function FlagCard({
           <div className="details mt-4 flex flex-col">
             <div>
               <span className="font-medium">Population: </span>
-              <span className="font-light">{population}</span>
+              <span className="font-light">
+                {parseInt(population).toLocaleString()}
+              </span>
             </div>
             <div>
               <span className="font-medium">Region: </span>
