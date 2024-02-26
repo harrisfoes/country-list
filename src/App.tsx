@@ -1,6 +1,9 @@
 import "./index.css";
 import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import Homepage from "./pages/Homepage";
+import Country from "./pages/Country";
+import Main from "./components/sections/Main";
 
 function App() {
   const [theme, setTheme] = useState<string | null>(null);
@@ -28,9 +31,22 @@ function App() {
   };
 
   return (
-    <>
-      <Homepage handleThemeSwitch={handleThemeSwitch} theme={theme} />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/country-list"
+          element={
+            <Homepage handleThemeSwitch={handleThemeSwitch} theme={theme} />
+          }
+        >
+          <Route index element={<Main />} />
+          <Route
+            path="/country-list/country/:countryId"
+            element={<Country />}
+          />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

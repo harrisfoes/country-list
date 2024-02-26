@@ -58,9 +58,14 @@ Step by step process
 - [x] Flag Filtering for searchbar
 - [x] useffect for handling empty string
 - [x] Flag filtering with region selector
-- [ ] Setting up pages
-- [ ] Home Page
-- [ ] Country/Flag Page
+- [x] Setting up pages
+      [x] setup router
+      [x] install pages
+- [x] Home Page
+- [x] Country/Flag Page
+      [ ] parse data to be readable
+      [ ] mobile
+      [ ] desktop
 
 ### Built with
 

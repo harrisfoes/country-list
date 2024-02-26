@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 type FlagCardProps = {
   image: string;
   name: string;
@@ -16,11 +18,13 @@ export default function FlagCard({
   return (
     <>
       <div className="flag-card mx-auto mt-4 w-[264px] shadow-md">
-        <img
-          src={image}
-          alt="flag-image"
-          className="mx-auto h-[160px] border shadow-md dark:border-darkblue-500"
-        />
+        <Link to={"/country-list/country/" + name}>
+          <img
+            src={image}
+            alt="flag-image"
+            className="mx-auto h-[160px] border shadow-md dark:border-darkblue-500"
+          />
+        </Link>
         <div className="flag-text mx-5 mt-4 pb-6">
           <span className="text-lg font-extrabold">{name}</span>
           <div className="details mt-4 flex flex-col">
