@@ -1,6 +1,6 @@
 import "./index.css";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Country from "./pages/Country";
 import Main from "./components/sections/Main";
