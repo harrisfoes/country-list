@@ -22,8 +22,10 @@ export default function Country() {
         console.log(countryData[0].borders);
         console.log(allData);
         const convertedBorders = countryData[0].borders?.map(
-          (border) =>
-            allData.filter((country) => country.alpha3Code === border)[0].name,
+          (border: string) =>
+            allData.filter(
+              (country: CountryAPISource) => country.alpha3Code === border,
+            )[0].name,
         );
 
         console.log(convertedBorders);
