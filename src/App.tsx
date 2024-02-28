@@ -41,8 +41,8 @@ function App() {
         >
           <Route index element={<Main />} />
           <Route
-            path="/country-list/country/:countryId"
-            element={<Country />}
+            path="/country-list/:countryId"
+            element={<Country theme={theme} />}
           />
         </Route>
       </Routes>

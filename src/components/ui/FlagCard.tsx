@@ -18,7 +18,7 @@ export default function FlagCard({
   return (
     <>
       <div className="flag-card mx-auto mt-4 w-[264px] shadow-md">
-        <Link to={"/country-list/country/" + name}>
+        <Link to={"/country-list/" + name}>
           <img
             src={image}
             alt="flag-image"
