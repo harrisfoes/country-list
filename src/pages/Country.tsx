@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { CountryAPISource } from "../types/api";
 
-export default function Country({ theme }: { theme: string }) {
+export default function Country({ theme }: { theme: string | null }) {
   let { countryId } = useParams();
   const [data, setData] = useState<CountryAPISource | null>(null);
   const [borders, setBorders] = useState<string[] | null>(null);
